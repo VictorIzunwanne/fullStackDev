@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-Br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Izunwanne Victor A.E" />
+    <meta
+      name="description"
+      content="A birthday surpise for King David celebrating his new Age"
+    />
+
+    <link rel="shortcut icon" href="cake.jpeg" type="image/x-icon" />
+    <title>Happy Birthday David! 🎉</title>
+  </head>
+
+  <style>
+    :root {
+      --background-color: linear-gradient(
+        120deg,
+        #43cea2 0%,
+        #185a9d 50%,
+        #ffd700 100%
+      );
+      --accent-color: #43cea2;
+      --shadow-color: rgba(67, 206, 162, 0.2);
+      --card-bg: rgba(67, 206, 162, 0.15);
+      --text-color: #185a9d;
+    }
+
+    html {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+      font-size: 1rem;
+    }
+
+    *,
+    *::after,
+    *::before {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      min-block-size: 100vh;
+      background: var(--background-color);
+      color: var(--accent-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #container {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: transparent;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #gate-one {
+      flex: 1;
+      background: var(--accent-color);
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      inline-size: 50%;
+      transition: all 0.5s;
+    }
+
+    button {
+      position: absolute;
+      z-index: 1;
+      inline-size: 10rem;
+      block-size: 10rem;
+      border-radius: 10rem;
+      font-size: 1rem;
+			font-weight: bolder;
+      padding: 2rem;
+      color: var(--text-color);
+      border: none;
+      filter: drop-shadow(0.5rem 0.5rem 1rem #00000034);
+			cursor: pointer;
+    }
+
+    button:active {
+      filter: none;
+    }
+
+    #gate-two {
+      flex: 1;
+      background: var(--accent-color);
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      inline-size: 50%;
+      transition: all 0.5s;
+    }
+
+    main {
+      inline-size: 40rem;
+      background-color: var(--shadow-color);
+      padding: 2rem;
+      border-radius: 2rem;
+      z-index: 9999;
+      backdrop-filter: blur(0.5rem);
+      text-align: center;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(5rem);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      block-size: 3rem;
+    }
+  </style>
+
+  <body>
+    <header></header>
+
+    <div id="container">
+      <div id="gate-one"></div>
+      <button type="button">Open Your Birthday Present</button>
+      <div id="gate-two"></div>
+    </div>
+
+    <main>
+      <h1>Happy Birthday David! 🎉</h1>
+      <p>
+        Dear David,<br /><br />
+        Wishing you the happiest of birthdays! 🎂 Today is a special day to
+        celebrate the amazing person you are and all the joy you bring to those
+        around you. May this new year of your life be filled with laughter,
+        adventure, and countless memorable moments. <br /><br />
+        You inspire everyone with your kindness, strength, and unwavering
+        positivity. As you celebrate another year, remember how much you are
+        loved and appreciated by your friends and family. May all your dreams
+        come true and may happiness follow you wherever you go.<br /><br />
+        Cheers to you, King David! Have a fantastic birthday and a wonderful
+        year ahead! 🥳🎈
+      </p>
+    </main>
+
+    <audio controls loop hidden>
+      <source src="happy-birthday.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <footer>Love from Victor</footer>
+
+    <script>
+      "use strict";
+
+      function createRandomCircles() {
+        const body = document.body;
+        const numCircles = 80;
+        const colors = ["#ffd700", "#43cea2", "#185a9d", "#ff69b4", "#ff6347"];
+        const circles = [];
+
+        for (let i = 0; i < numCircles; i++) {
+          const circle = document.createElement("div");
+          const size = Math.random() * 2 + 1; // 1rem to 3rem
+          const color = colors[Math.floor(Math.random() * colors.length)];
+
+          circle.style.backgroundColor = color;
+          circle.style.width = `${size}rem`;
+          circle.style.height = `${size}rem`;
+          circle.style.borderRadius = "50%";
+          circle.style.position = "fixed";
+          circle.style.zIndex = "1000";
+          circle.style.opacity = "0.6";
+          circle.style.pointerEvents = "none";
+          circle.style.top = `${Math.random() * 90}vh`;
+          circle.style.left = `${Math.random() * 90}vw`;
+
+          body.appendChild(circle);
+
+          // Store position and velocity for animation
+          circles.push({
+            el: circle,
+            size: size * 16, // convert rem to px (assuming 1rem = 16px)
+            x: window.innerWidth * Math.random(),
+            y: window.innerHeight * Math.random(),
+            dx: (Math.random() - 0.5) * 2,
+            dy: (Math.random() - 0.5) * 2,
+          });
+        }
+
+        function animate() {
+          for (const c of circles) {
+            c.x += c.dx;
+            c.y += c.dy;
+
+            // Bounce off edges
+            if (c.x <= 0 || c.x + c.size >= window.innerWidth) c.dx *= -1;
+            if (c.y <= 0 || c.y + c.size >= window.innerHeight) c.dy *= -1;
+
+            c.el.style.left = `${c.x}px`;
+            c.el.style.top = `${c.y}px`;
+          }
+          requestAnimationFrame(animate);
+        }
+
+        animate();
+      }
+
+      createRandomCircles();
+
+      const key = document.querySelector("button");
+
+      key.addEventListener("click", () => {
+        const gateOne = document.querySelector("#gate-one");
+        const gateTwo = document.querySelector("#gate-two");
+
+        gateOne.style.inlineSize = 0;
+        gateTwo.style.inlineSize = 0;
+
+				const audio = document.querySelector("audio");
+
+				// Confetti effect
+				function launchConfetti() {
+					const confettiColors = ["#ffd700", "#43cea2", "#185a9d", "#ff69b4", "#ff6347"];
+					const confettiCount = 120;
+					for (let i = 0; i < confettiCount; i++) {
+						const confetti = document.createElement("div");
+						const size = Math.random() * 8 + 8; // 8px to 16px
+						confetti.style.position = "fixed";
+						confetti.style.left = `${Math.random() * 100}vw`;
+						confetti.style.top = "-20px";
+						confetti.style.width = `${size}px`;
+						confetti.style.height = `${size * 0.4}px`;
+						confetti.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+						confetti.style.borderRadius = "2px";
+						confetti.style.opacity = "0.8";
+						confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+						confetti.style.zIndex = "10000";
+						confetti.style.pointerEvents = "none";
+						document.body.appendChild(confetti);
+
+						// Animate confetti
+						const fall = confetti.animate([
+							{ transform: confetti.style.transform, top: "-20px" },
+							{ transform: `rotate(${Math.random() * 720}deg)`, top: "110vh" }
+						], {
+							duration: 1800 + Math.random() * 1200,
+							easing: "ease-in"
+						});
+
+						fall.onfinish = () => confetti.remove();
+					}
+				}
+
+				launchConfetti();
+        if (audio) {
+          audio.play().catch(() => {});
+        }
+
+        key.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
